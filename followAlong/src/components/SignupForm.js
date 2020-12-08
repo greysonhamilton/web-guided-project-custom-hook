@@ -32,7 +32,7 @@ export default function SignupForm() {
 }
 
   const classes = useStyles();
-  const [values, handleChanges, handleSubmit, clearForm] = useForm(initialValues);
+  const [values, handleChanges, handleSubmit, clearForm] = useForm("formValues", initialValues);
 
    return (
     <div p={2} className="form">
