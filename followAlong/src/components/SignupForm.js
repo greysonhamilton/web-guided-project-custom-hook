@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 import Button from "../theme/Button";
+import { useForm } from "../hooks/useForm";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -22,24 +23,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignupForm() {
+
+  const initialValues = {
+
+    firstName: '',
+    lastName: ''
+
+}
+
   const classes = useStyles();
-  const [firstName, setFirstName] = useState("");
+  const [values, handleChanges, handleSubmit, clearForm] = useForm(initialValues);
 
-  const handleChanges = e => {
-    setFirstName(e.target.value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    alert(firstName);
-  };
-
-  const clearForm = e => {
-    e.preventDefault();
-    setFirstName("");
-  };
-
-  return (
+   return (
     <div p={2} className="form">
       <form onSubmit={handleSubmit}>
         <fieldset>
@@ -49,11 +44,21 @@ export default function SignupForm() {
             label="First Name"
             className={classes.textField}
             name="firstName"
-            value={firstName}
+            value={values.firstName}
             onChange={handleChanges}
             margin="normal"
             variant="outlined"
           />
+          <TextField 
+            id='outlined-name' 
+            label='Last Name' 
+            className={classes.textField}
+            name='lastName' 
+            value={values.lastName} 
+            onChange={handleChanges}
+            margin='normal' 
+            variant='outlined'
+           />
           <div className="flexer">
             <Button color="red" onClick={clearForm}>
               Clear
